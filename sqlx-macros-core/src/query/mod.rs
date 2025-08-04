@@ -125,6 +125,11 @@ fn init_metadata(manifest_dir: &String) -> Metadata {
 
     let database_url = env("DATABASE_URL").ok().or(database_url);
 
+    let offline_dir = env("SQLX_OFFLINE_DIR")
+        .ok()
+        .or(offline_dir.as_ref().cloned())
+        .or(offline_dir);
+
     Metadata {
         manifest_dir,
         offline,
